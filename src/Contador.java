@@ -1,17 +1,22 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Contador {
     public static void main(String[] args) {
-        Scanner terminal = new Scanner(System.in);
-        System.out.println("Digite o primeiro parâmetro");
-        int parametroUm = terminal.nextInt();
-        System.out.println("Digite o segundo parâmetro");
-        int parametroDois = terminal.nextInt();
-
         try {
+            Scanner terminal = new Scanner(System.in);
+            System.out.println("Digite o primeiro parâmetro");
+            int parametroUm = terminal.nextInt();
+            System.out.println("Digite o segundo parâmetro");
+            int parametroDois = terminal.nextInt();
             contar(parametroUm, parametroDois);
-        } catch (ParametrosInvalidosException exception) {
-            System.out.println("O segundo parâmetro deve ser maior que o primeiro");
+        } catch (InputMismatchException | ParametrosInvalidosException exception) {
+            if (exception instanceof InputMismatchException) {
+                System.out.println("Ambos os parâmetros devem ser números inteiros");
+            }
+            if (exception instanceof ParametrosInvalidosException) {
+                System.out.println("O segundo parâmetro deve ser maior que o primeiro");
+            }
         }
 
     }
